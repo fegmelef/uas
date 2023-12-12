@@ -1,0 +1,800 @@
+[{
+  "_id": 1,
+  "nama": "Marsh PLC",
+  "negara": "Belarus",
+  "kota": "East Jordanmouth",
+  "alamat": "888 Compton Run\nLake Angelshire, UT 65611",
+  "score": 3.5
+},
+{
+  "_id": 2,
+  "nama": "Klein-Sparks",
+  "negara": "American Samoa",
+  "kota": "Danielton",
+  "alamat": "555 Huynh Park Apt. 573\nGlasshaven, ME 43814",
+  "score": 4.6
+},
+{
+  "_id": 3,
+  "nama": "Kelley, Lucero and Watson",
+  "negara": "Somalia",
+  "kota": "Port Jennifer",
+  "alamat": "61960 Alison Squares\nWest Johnathan, ME 40509",
+  "score": 4.1
+},
+{
+  "_id": 4,
+  "nama": "Reyes, Gay and Johnson",
+  "negara": "Bosnia and Herzegovina",
+  "kota": "North Nathaniel",
+  "alamat": "1732 Derek Fords\nLarrymouth, MN 86507",
+  "score": 4.9
+},
+{
+  "_id": 5,
+  "nama": "Yu, Farrell and Combs",
+  "negara": "Guadeloupe",
+  "kota": "West Marissa",
+  "alamat": "343 Nancy Tunnel\nEast Mauriceshire, TN 10625",
+  "score": 4
+},
+{
+  "_id": 6,
+  "nama": "Davidson, Brown and Schneider",
+  "negara": "Pakistan",
+  "kota": "Jenniferbury",
+  "alamat": "17050 Everett Shores\nDianaberg, MO 12703",
+  "score": 4.4
+},
+{
+  "_id": 7,
+  "nama": "Stewart PLC",
+  "negara": "Netherlands Antilles",
+  "kota": "Jamesbury",
+  "alamat": "0658 Vasquez Row Suite 368\nSouth Keith, VA 48991",
+  "score": 4.6
+},
+{
+  "_id": 8,
+  "nama": "Wright LLC",
+  "negara": "North Macedonia",
+  "kota": "Lake Tammybury",
+  "alamat": "626 Brent Street Apt. 692\nNew Dakotaland, CA 30274",
+  "score": 3.3
+},
+{
+  "_id": 9,
+  "nama": "Riley-Hendrix",
+  "negara": "Bermuda",
+  "kota": "North Jeffrey",
+  "alamat": "PSC 3504, Box 9930\nAPO AE 20018",
+  "score": 3.6
+},
+{
+  "_id": 10,
+  "nama": "Blake-Hunt",
+  "negara": "Singapore",
+  "kota": "North Anna",
+  "alamat": "40293 Allen Summit\nSouth Shelley, MH 68281",
+  "score": 4.1
+},
+{
+  "_id": 11,
+  "nama": "Cowan-Hall",
+  "negara": "Reunion",
+  "kota": "West Kylechester",
+  "alamat": "90183 Julia Courts\nSouth Micheleshire, GU 16858",
+  "score": 4.1
+},
+{
+  "_id": 12,
+  "nama": "Hernandez-Meadows",
+  "negara": "Greenland",
+  "kota": "Schaefermouth",
+  "alamat": "635 Zimmerman Manor Suite 376\nEast Dawnhaven, AS 57440",
+  "score": 4.1
+},
+{
+  "_id": 13,
+  "nama": "Logan-Berger",
+  "negara": "Svalbard & Jan Mayen Islands",
+  "kota": "Jasonmouth",
+  "alamat": "87376 Erin Drives Apt. 891\nMarissachester, RI 46412",
+  "score": 3.2
+},
+{
+  "_id": 14,
+  "nama": "Mathews, Banks and Erickson",
+  "negara": "Falkland Islands (Malvinas)",
+  "kota": "New Holly",
+  "alamat": "28760 Lloyd Street Suite 408\nBarrymouth, PR 45397",
+  "score": 3.2
+},
+{
+  "_id": 15,
+  "nama": "Evans and Sons",
+  "negara": "Solomon Islands",
+  "kota": "Michaelborough",
+  "alamat": "7422 Nicole Extension Suite 941\nRachelshire, NJ 80568",
+  "score": 4.1
+},
+{
+  "_id": 16,
+  "nama": "Griffin, Taylor and Schneider",
+  "negara": "Cote d'Ivoire",
+  "kota": "Sarahton",
+  "alamat": "361 Jeremy Pines\nCarmenshire, NJ 24964",
+  "score": 3.9
+},
+{
+  "_id": 17,
+  "nama": "Peterson, Patterson and Gilbert",
+  "negara": "Grenada",
+  "kota": "North Daniel",
+  "alamat": "094 Monroe Expressway\nLoriland, GA 49652",
+  "score": 3.2
+},
+{
+  "_id": 18,
+  "nama": "Brown, Martin and Miller",
+  "negara": "China",
+  "kota": "South John",
+  "alamat": "48881 Jeffrey Courts\nPhillipsfurt, OR 20193",
+  "score": 3.5
+},
+{
+  "_id": 19,
+  "nama": "Tucker-Calderon",
+  "negara": "British Indian Ocean Territory (Chagos Archipelago)",
+  "kota": "North Alexandria",
+  "alamat": "14927 Anthony Islands\nClayview, AL 72415",
+  "score": 4.1
+},
+{
+  "_id": 20,
+  "nama": "Scott Group",
+  "negara": "Palestinian Territory",
+  "kota": "South Jacquelinefurt",
+  "alamat": "769 Michael Springs\nLake Abigailbury, KY 85037",
+  "score": 4.5
+},
+{
+  "_id": 21,
+  "nama": "Hawkins, Romero and Morris",
+  "negara": "Australia",
+  "kota": "Gutierrezfurt",
+  "alamat": "916 Lisa Rue Suite 289\nCoreyfurt, KY 76072",
+  "score": 3.3
+},
+{
+  "_id": 22,
+  "nama": "Hill and Sons",
+  "negara": "Japan",
+  "kota": "Port Theodoreborough",
+  "alamat": "70729 Cooper Knolls\nPort Lesliebury, SD 79675",
+  "score": 4.1
+},
+{
+  "_id": 23,
+  "nama": "Myers-Keller",
+  "negara": "Russian Federation",
+  "kota": "Melissaside",
+  "alamat": "934 Suzanne Locks Suite 452\nWiseberg, PW 58997",
+  "score": 3.1
+},
+{
+  "_id": 24,
+  "nama": "Allison-Bell",
+  "negara": "New Caledonia",
+  "kota": "New Ronald",
+  "alamat": "13532 Smith Lodge Apt. 870\nCraneville, ND 04847",
+  "score": 3.6
+},
+{
+  "_id": 25,
+  "nama": "Riddle PLC",
+  "negara": "North Macedonia",
+  "kota": "Danielfort",
+  "alamat": "415 Escobar Trace\nBlakehaven, NY 01869",
+  "score": 4.2
+},
+{
+  "_id": 26,
+  "nama": "George-Mahoney",
+  "negara": "Comoros",
+  "kota": "Fischerborough",
+  "alamat": "59387 Hale Port\nNorth Laura, MT 86747",
+  "score": 3.3
+},
+{
+  "_id": 27,
+  "nama": "Torres-Dickerson",
+  "negara": "Serbia",
+  "kota": "North Craig",
+  "alamat": "89480 Yoder Expressway Suite 089\nPort Michael, NV 71685",
+  "score": 4.3
+},
+{
+  "_id": 28,
+  "nama": "Holmes Group",
+  "negara": "Hong Kong",
+  "kota": "Zacharyshire",
+  "alamat": "68307 Brent Gateway\nLewisville, SD 17695",
+  "score": 3.7
+},
+{
+  "_id": 29,
+  "nama": "Campbell-Baker",
+  "negara": "Wallis and Futuna",
+  "kota": "Lake Brett",
+  "alamat": "036 Brad Squares Suite 815\nJustinville, IL 53424",
+  "score": 3.9
+},
+{
+  "_id": 30,
+  "nama": "Mathews, Arnold and Huff",
+  "negara": "Gabon",
+  "kota": "Lisaborough",
+  "alamat": "0908 Kathryn Skyway\nBrentside, MO 64226",
+  "score": 4
+},
+{
+  "_id": 31,
+  "nama": "Gaines, Harris and Patrick",
+  "negara": "British Virgin Islands",
+  "kota": "Lake Kathyshire",
+  "alamat": "0206 Seth Fields Apt. 421\nRichhaven, NC 45578",
+  "score": 4.1
+},
+{
+  "_id": 32,
+  "nama": "Moody, Wilson and Hansen",
+  "negara": "Micronesia",
+  "kota": "Rogerstown",
+  "alamat": "93230 John Row\nHallport, HI 61079",
+  "score": 4.9
+},
+{
+  "_id": 33,
+  "nama": "Aguilar Group",
+  "negara": "Rwanda",
+  "kota": "Port Tanya",
+  "alamat": "890 Amber Courts Apt. 009\nWest Kevin, AL 57243",
+  "score": 4.5
+},
+{
+  "_id": 34,
+  "nama": "Caldwell Group",
+  "negara": "Morocco",
+  "kota": "Maryborough",
+  "alamat": "536 Micheal Forge\nSouth Catherine, MO 52231",
+  "score": 3.5
+},
+{
+  "_id": 35,
+  "nama": "Bridges, Jones and Cunningham",
+  "negara": "Mauritania",
+  "kota": "North Daniel",
+  "alamat": "PSC 8970, Box 8943\nAPO AE 24679",
+  "score": 3.5
+},
+{
+  "_id": 36,
+  "nama": "Terry, Sanchez and Hill",
+  "negara": "Guernsey",
+  "kota": "Jacquelineville",
+  "alamat": "212 Eric Points\nThomasberg, ID 52724",
+  "score": 3.5
+},
+{
+  "_id": 37,
+  "nama": "Hill Inc",
+  "negara": "Bahamas",
+  "kota": "Port Shellyfurt",
+  "alamat": "357 Charles Mountains Suite 415\nWest Blaketon, NY 79984",
+  "score": 3.7
+},
+{
+  "_id": 38,
+  "nama": "Colon, Phillips and Clark",
+  "negara": "Morocco",
+  "kota": "New Apriltown",
+  "alamat": "93696 Brenda Fall\nEdwardstad, MH 94140",
+  "score": 3.8
+},
+{
+  "_id": 39,
+  "nama": "Dickson, Phillips and Chambers",
+  "negara": "Kazakhstan",
+  "kota": "Kathleenberg",
+  "alamat": "PSC 3264, Box 8980\nAPO AE 60431",
+  "score": 4.8
+},
+{
+  "_id": 40,
+  "nama": "Smith, Alvarez and Griffin",
+  "negara": "Bulgaria",
+  "kota": "Holtland",
+  "alamat": "Unit 8938 Box 8775\nDPO AP 94695",
+  "score": 4
+},
+{
+  "_id": 41,
+  "nama": "Harris Ltd",
+  "negara": "Czech Republic",
+  "kota": "Lake Joel",
+  "alamat": "08598 Monique Inlet Suite 966\nEast Melanie, PW 03580",
+  "score": 3.9
+},
+{
+  "_id": 42,
+  "nama": "Kemp Inc",
+  "negara": "Falkland Islands (Malvinas)",
+  "kota": "South Ashley",
+  "alamat": "762 Mayer Spring Apt. 168\nRussellborough, MI 26004",
+  "score": 3.3
+},
+{
+  "_id": 43,
+  "nama": "Rodriguez Inc",
+  "negara": "Uruguay",
+  "kota": "East Cassidy",
+  "alamat": "8823 Mendoza Spur\nNewmanport, SD 99081",
+  "score": 4
+},
+{
+  "_id": 44,
+  "nama": "Campbell-Stewart",
+  "negara": "Korea",
+  "kota": "New Joanna",
+  "alamat": "6127 Terry Shoals Suite 135\nEast Michaelshire, WV 96463",
+  "score": 4.2
+},
+{
+  "_id": 45,
+  "nama": "Carpenter and Sons",
+  "negara": "Guatemala",
+  "kota": "East Lisaton",
+  "alamat": "24083 Williams Meadow Suite 351\nKellyfurt, WV 23058",
+  "score": 4.6
+},
+{
+  "_id": 46,
+  "nama": "Kennedy, Hardy and Velez",
+  "negara": "United States of America",
+  "kota": "Cruzbury",
+  "alamat": "07294 Miller Camp\nKellerfurt, PR 38487",
+  "score": 3.8
+},
+{
+  "_id": 47,
+  "nama": "Blackwell-Vazquez",
+  "negara": "Trinidad and Tobago",
+  "kota": "Michaelport",
+  "alamat": "1052 Karen Cliff Suite 451\nNew Evan, KY 07614",
+  "score": 3.7
+},
+{
+  "_id": 48,
+  "nama": "Brown, Perry and Ayala",
+  "negara": "Indonesia",
+  "kota": "Mirandafurt",
+  "alamat": "32889 Valentine Turnpike Apt. 093\nNew Ashley, MI 31446",
+  "score": 4.3
+},
+{
+  "_id": 49,
+  "nama": "Shaw Inc",
+  "negara": "Western Sahara",
+  "kota": "Joneston",
+  "alamat": "81988 Lane Falls\nEast Austinland, MN 41334",
+  "score": 4.3
+},
+{
+  "_id": 50,
+  "nama": "Brady-Cook",
+  "negara": "Haiti",
+  "kota": "North Anthonyville",
+  "alamat": "28818 Christian Point Suite 496\nNorth Crystal, WV 21326",
+  "score": 3.7
+},
+{
+  "_id": 51,
+  "nama": "Palmer Inc",
+  "negara": "India",
+  "kota": "Sparksburgh",
+  "alamat": "5038 Miller Ports\nPort Lauren, MS 43520",
+  "score": 3.6
+},
+{
+  "_id": 52,
+  "nama": "Edwards-Scott",
+  "negara": "French Polynesia",
+  "kota": "Smithborough",
+  "alamat": "375 Clinton Way Apt. 820\nNew Jason, TX 12765",
+  "score": 3
+},
+{
+  "_id": 53,
+  "nama": "Frank, Baker and Anderson",
+  "negara": "Djibouti",
+  "kota": "Arellanoport",
+  "alamat": "7367 Smith Estate Suite 180\nRussellton, MN 15366",
+  "score": 3.4
+},
+{
+  "_id": 54,
+  "nama": "Kim Ltd",
+  "negara": "Guinea",
+  "kota": "Annchester",
+  "alamat": "49582 Cassandra Lights\nAllenmouth, KS 20307",
+  "score": 4.1
+},
+{
+  "_id": 55,
+  "nama": "Coleman PLC",
+  "negara": "Liberia",
+  "kota": "Port Kristaville",
+  "alamat": "35270 Steven Forges\nWeeksfurt, FM 40352",
+  "score": 3.3
+},
+{
+  "_id": 56,
+  "nama": "Mcneil, Campbell and Carey",
+  "negara": "Singapore",
+  "kota": "South Zachary",
+  "alamat": "30622 Sean Oval Apt. 385\nNew Kayla, IN 44139",
+  "score": 4.3
+},
+{
+  "_id": 57,
+  "nama": "Cummings Group",
+  "negara": "Solomon Islands",
+  "kota": "West Monica",
+  "alamat": "248 Grant Run\nNew Adam, CA 70548",
+  "score": 4.6
+},
+{
+  "_id": 58,
+  "nama": "Melendez-Sharp",
+  "negara": "France",
+  "kota": "Vickifort",
+  "alamat": "111 Bennett Camp Suite 867\nNorth Dorothy, IL 02572",
+  "score": 3.8
+},
+{
+  "_id": 59,
+  "nama": "Gomez-Chapman",
+  "negara": "Sweden",
+  "kota": "Joshuastad",
+  "alamat": "268 Espinoza Lodge\nPort Andrewmouth, MS 79701",
+  "score": 3.4
+},
+{
+  "_id": 60,
+  "nama": "Clark-West",
+  "negara": "China",
+  "kota": "New Mikayla",
+  "alamat": "027 Tina Path Suite 597\nWilliamsberg, PW 93514",
+  "score": 3.4
+},
+{
+  "_id": 61,
+  "nama": "Johnson Ltd",
+  "negara": "Kazakhstan",
+  "kota": "Brendastad",
+  "alamat": "1801 Dana Court Apt. 173\nBurkestad, SD 50124",
+  "score": 3.6
+},
+{
+  "_id": 62,
+  "nama": "Day-Manning",
+  "negara": "Armenia",
+  "kota": "East Katieland",
+  "alamat": "485 Michael Wells Apt. 698\nPort Heidi, FL 45301",
+  "score": 4
+},
+{
+  "_id": 63,
+  "nama": "Mercer-Blankenship",
+  "negara": "Nauru",
+  "kota": "North Lisaborough",
+  "alamat": "1525 Angela Stream Suite 709\nFernandezborough, IN 44001",
+  "score": 3.9
+},
+{
+  "_id": 64,
+  "nama": "Adams, Whitehead and Maxwell",
+  "negara": "Kuwait",
+  "kota": "Lake Tammy",
+  "alamat": "Unit 1945 Box 8586\nDPO AP 63783",
+  "score": 4.7
+},
+{
+  "_id": 65,
+  "nama": "Flores, Hill and Abbott",
+  "negara": "Peru",
+  "kota": "Chamberston",
+  "alamat": "3330 Williams Run Suite 802\nNorth Kristin, NY 17984",
+  "score": 3.6
+},
+{
+  "_id": 66,
+  "nama": "Finley LLC",
+  "negara": "Austria",
+  "kota": "New Kevin",
+  "alamat": "USNS Carter\nFPO AE 86856",
+  "score": 3
+},
+{
+  "_id": 67,
+  "nama": "Owen LLC",
+  "negara": "Iran",
+  "kota": "East Tara",
+  "alamat": "28953 Isabel Mountains Suite 081\nPort William, TN 24984",
+  "score": 3.3
+},
+{
+  "_id": 68,
+  "nama": "Mendoza-Hernandez",
+  "negara": "Guernsey",
+  "kota": "North Austinbury",
+  "alamat": "0252 Mason Field\nLake Chadburgh, MA 23873",
+  "score": 3.3
+},
+{
+  "_id": 69,
+  "nama": "Curry-Carter",
+  "negara": "Gambia",
+  "kota": "North John",
+  "alamat": "08771 Jones Meadows\nJesuschester, NY 50492",
+  "score": 4.1
+},
+{
+  "_id": 70,
+  "nama": "Medina-Koch",
+  "negara": "French Guiana",
+  "kota": "West Debrafort",
+  "alamat": "23918 Lawrence Locks\nNorth Melissa, TX 51198",
+  "score": 3.7
+},
+{
+  "_id": 71,
+  "nama": "Hays LLC",
+  "negara": "India",
+  "kota": "Port Paul",
+  "alamat": "051 Allison Flat Apt. 612\nMichellefort, UT 83509",
+  "score": 3.6
+},
+{
+  "_id": 72,
+  "nama": "Garcia Group",
+  "negara": "Austria",
+  "kota": "Nathanmouth",
+  "alamat": "0011 Patricia Bypass Suite 760\nPort Michaelport, TN 53251",
+  "score": 4.3
+},
+{
+  "_id": 73,
+  "nama": "Young, Pace and Clark",
+  "negara": "Rwanda",
+  "kota": "West Alfred",
+  "alamat": "USNS Nelson\nFPO AA 44472",
+  "score": 4
+},
+{
+  "_id": 74,
+  "nama": "Foster Ltd",
+  "negara": "Singapore",
+  "kota": "West Josephbury",
+  "alamat": "537 Vaughn Keys\nLake Elizabethfort, NH 06901",
+  "score": 4.3
+},
+{
+  "_id": 75,
+  "nama": "Salazar PLC",
+  "negara": "United States of America",
+  "kota": "Williamtown",
+  "alamat": "31693 Jennifer Forks Apt. 888\nNguyenborough, OH 76297",
+  "score": 4.1
+},
+{
+  "_id": 76,
+  "nama": "Haney LLC",
+  "negara": "Botswana",
+  "kota": "Lake Julie",
+  "alamat": "68640 Laura Port Suite 819\nMarissaview, MT 00773",
+  "score": 4.3
+},
+{
+  "_id": 77,
+  "nama": "Watson LLC",
+  "negara": "Bosnia and Herzegovina",
+  "kota": "East Allison",
+  "alamat": "932 Sean Bypass\nWest Tracy, WY 87164",
+  "score": 3.7
+},
+{
+  "_id": 78,
+  "nama": "Richard, Moreno and Moyer",
+  "negara": "Equatorial Guinea",
+  "kota": "New Marytown",
+  "alamat": "5459 Davis Ferry\nAimeeport, TN 58949",
+  "score": 3.9
+},
+{
+  "_id": 79,
+  "nama": "Wu, Villegas and Perez",
+  "negara": "Yemen",
+  "kota": "Martinmouth",
+  "alamat": "761 Lisa Lakes Suite 136\nWest Trevor, WI 56435",
+  "score": 5
+},
+{
+  "_id": 80,
+  "nama": "Golden-Mcgee",
+  "negara": "Iran",
+  "kota": "West Johnborough",
+  "alamat": "Unit 7476 Box 8985\nDPO AA 32964",
+  "score": 4.9
+},
+{
+  "_id": 81,
+  "nama": "Lee and Sons",
+  "negara": "Gambia",
+  "kota": "Castanedaton",
+  "alamat": "39539 Gonzalez Via Apt. 430\nKyletown, NV 13543",
+  "score": 4.3
+},
+{
+  "_id": 82,
+  "nama": "Morgan PLC",
+  "negara": "Maldives",
+  "kota": "Williamtown",
+  "alamat": "96736 Stewart Locks Apt. 617\nNorth Krististad, MD 26213",
+  "score": 3.4
+},
+{
+  "_id": 83,
+  "nama": "Stephens-Campbell",
+  "negara": "Benin",
+  "kota": "North Kelsey",
+  "alamat": "70317 Ryan Light\nPort David, NH 15861",
+  "score": 3.7
+},
+{
+  "_id": 84,
+  "nama": "Sullivan Inc",
+  "negara": "Norfolk Island",
+  "kota": "Port Carrieport",
+  "alamat": "39222 Shaffer Wall\nNorth Sherrifurt, MS 42654",
+  "score": 4.8
+},
+{
+  "_id": 85,
+  "nama": "Collins, Clark and Brown",
+  "negara": "Switzerland",
+  "kota": "Hannahbury",
+  "alamat": "198 April Mews Suite 016\nRichshire, MA 72036",
+  "score": 3
+},
+{
+  "_id": 86,
+  "nama": "Harrington-Taylor",
+  "negara": "Bolivia",
+  "kota": "Evansmouth",
+  "alamat": "63805 Lopez Brooks Suite 569\nWest Ronaldstad, SD 68283",
+  "score": 4.1
+},
+{
+  "_id": 87,
+  "nama": "Richardson, Cardenas and Serrano",
+  "negara": "Ukraine",
+  "kota": "West Lindseyland",
+  "alamat": "39230 Dominique Hill Apt. 142\nPort Andre, NJ 31143",
+  "score": 3.3
+},
+{
+  "_id": 88,
+  "nama": "Hall-Ward",
+  "negara": "Montserrat",
+  "kota": "Lake Jennifer",
+  "alamat": "1530 Kevin Wells Suite 217\nSouth Kimberlyborough, IA 53533",
+  "score": 4.4
+},
+{
+  "_id": 89,
+  "nama": "Graves-Wright",
+  "negara": "Thailand",
+  "kota": "Holtport",
+  "alamat": "83966 Price Vista Suite 938\nEatonchester, MS 24126",
+  "score": 3.5
+},
+{
+  "_id": 90,
+  "nama": "Jenkins, Gutierrez and Bean",
+  "negara": "Papua New Guinea",
+  "kota": "Kellyhaven",
+  "alamat": "371 Craig Isle\nKimberlyville, NH 23200",
+  "score": 4.7
+},
+{
+  "_id": 91,
+  "nama": "Smith Inc",
+  "negara": "Seychelles",
+  "kota": "Nicholasfurt",
+  "alamat": "5075 James Brooks Apt. 394\nAmandafort, MT 93707",
+  "score": 3.2
+},
+{
+  "_id": 92,
+  "nama": "Goodman, Austin and Tucker",
+  "negara": "Mongolia",
+  "kota": "North Anthony",
+  "alamat": "15474 Fox Lodge Suite 471\nMacdonaldchester, AL 80131",
+  "score": 3.6
+},
+{
+  "_id": 93,
+  "nama": "Thompson Ltd",
+  "negara": "Netherlands Antilles",
+  "kota": "Teresaview",
+  "alamat": "9701 Peterson Walk Apt. 683\nSullivanstad, WA 34476",
+  "score": 4.3
+},
+{
+  "_id": 94,
+  "nama": "Fleming-Strickland",
+  "negara": "Benin",
+  "kota": "Calderonstad",
+  "alamat": "Unit 1709 Box 7331\nDPO AA 61101",
+  "score": 3.1
+},
+{
+  "_id": 95,
+  "nama": "Mccoy, Reese and Strong",
+  "negara": "Northern Mariana Islands",
+  "kota": "Grossside",
+  "alamat": "3043 Melissa Radial Suite 902\nLake Sandy, CT 59405",
+  "score": 3
+},
+{
+  "_id": 96,
+  "nama": "Gonzalez LLC",
+  "negara": "Palestinian Territory",
+  "kota": "Rachelchester",
+  "alamat": "5780 Stephen Brook Suite 550\nEast Kimberly, MT 57808",
+  "score": 4.5
+},
+{
+  "_id": 97,
+  "nama": "Rodgers Group",
+  "negara": "Mayotte",
+  "kota": "Lake Glenda",
+  "alamat": "58399 Wright Mountains\nRamseyborough, RI 86631",
+  "score": 5
+},
+{
+  "_id": 98,
+  "nama": "Johnson-Robinson",
+  "negara": "Jordan",
+  "kota": "Lake Sarahchester",
+  "alamat": "000 Owens Orchard\nPort Sandra, NV 85384",
+  "score": 4.2
+},
+{
+  "_id": 99,
+  "nama": "Lee-Miller",
+  "negara": "Libyan Arab Jamahiriya",
+  "kota": "Stevenport",
+  "alamat": "16409 Jennifer Road Apt. 344\nEast Nancy, MT 69035",
+  "score": 4.4
+},
+{
+  "_id": 100,
+  "nama": "Gutierrez-Fernandez",
+  "negara": "Malawi",
+  "kota": "Rayton",
+  "alamat": "27423 Joshua Common\nNorth Anthonyport, NC 56724",
+  "score": 4.9
+}]
