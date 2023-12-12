@@ -1,0 +1,40 @@
+[{
+  "_id": 1,
+  "nama": "deluxe single bed",
+  "amenities": {
+    "room_food_amenities": "No Free Stuff",
+    "room_bathroom_amenities": "no bathroom amenities"
+  }
+},
+{
+  "_id": 2,
+  "nama": "deluxe twin bed",
+  "amenities": {
+    "room_food_amenities": "No Free Stuff",
+    "room_bathroom_amenities": "Free toothpaste and soap"
+  }
+},
+{
+  "_id": 3,
+  "nama": "superior",
+  "amenities": {
+    "room_food_amenities": "Free 2 botol air",
+    "room_bathroom_amenities": "no bathroom amenities"
+  }
+},
+{
+  "_id": 4,
+  "nama": "standard",
+  "amenities": {
+    "room_food_amenities": "Free Wine and all snack",
+    "room_bathroom_amenities": "Free toothpaste and soap"
+  }
+},
+{
+  "_id": 5,
+  "nama": "suite",
+  "amenities": {
+    "room_food_amenities": "Free snackbar",
+    "room_bathroom_amenities": "only soap"
+  }
+}]
