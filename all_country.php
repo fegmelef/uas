@@ -2,52 +2,85 @@
 include('connect.php');
 require_once 'autoload.php';
 $client = new MongoDB\Client();
-$customers = $client->pdds->customers;
 $bookings = $client->pdds->bookings;
 
-$customerData = $customers->find();
 $bookingData = $bookings->find();
 
 // Process data to calculate required values
 $countryStats = array();
+$query = "SELECT negara, id AS _id FROM customers";
+$result = $conn->query($query);
 
-foreach ($customerData as $customer) {
-    $country = $customer['negara'];
-    $totalCustomers = isset($countryStats[$country]['totalCustomers']) ? $countryStats[$country]['totalCustomers'] + 1 : 1;
+// Check if the query was successful
+if ($result !== false) {
+    // Fetch each row
+    while ($customer = $result->fetch_assoc()) {
+        $country = (string)$customer['negara'];
+        $totalCustomers = isset($countryStats[$country]['totalCustomers']) ? $countryStats[$country]['totalCustomers'] + 1 : 1;
+        $customerBookings = iterator_to_array($bookings->find(['id_customer' => (int)$customer['_id']]));
+        
+        $totalBookings = isset($countryStats[$country]['totalBookings']) ? $countryStats[$country]['totalBookings'] + count($customerBookings) : count($customerBookings);
+        // Calculate total_orang for each booking
+        $bookingIds = [];
+        $totalOrang = 0;
+        $totalkamar = 0;
+        $totaldurasi = 0;
 
-    // Fetch bookings for the current customer directly from the cursor
-    $customerBookings = iterator_to_array($bookings->find(['id_customer' => $customer['_id']]));
+        // Process each booking for the customer
+        foreach ($customerBookings as $booking) {
+            $bookingIds[] = (int)$booking['_id'];
+            $totalOrang += $booking['total_orang'];
+            $totalkamar += $booking['total_kamar'];
+            $totaldurasi += $booking['durasi'];
+        }
 
-    $totalBookings = isset($countryStats[$country]['totalBookings']) ? $countryStats[$country]['totalBookings'] + count($customerBookings) : count($customerBookings);
-
-    // Calculate total_orang for each booking
-    $totalOrang = 0;
-    foreach ($customerBookings as $booking) {
-        $totalOrang += $booking['total_orang'];
-    }
-    $totalkamar = 0;
-    foreach ($customerBookings as $booking) {
-        $totalkamar += $booking['total_kamar'];
-    }
-    $totaldurasi = 0;
-    foreach ($customerBookings as $booking) {
-        $totaldurasi += $booking['durasi'];
-    }
-
-    // Calculate average_orang
-    $averageOrang = ($totalBookings > 0) ? $totalOrang / $totalBookings : 0;
-    $averageKamar = ($totalBookings > 0) ? $totalkamar / $totalBookings : 0;
-    $averageDurasi = ($totalBookings > 0) ? $totaldurasi / $totalBookings : 0;
-
-    $countryStats[$country] = array(
-        'totalCustomers' => $totalCustomers,
-        'totalBookings' => $totalBookings,
-        'averageOrang' => $averageOrang,
-        'averageKamar' => $averageKamar,
-        'averageDurasi' => $averageDurasi,
-        // Add other calculated values here
-    );
+        // Calculate average_orang
+        $averageOrang = ($totalBookings > 0) ? $totalOrang / $totalBookings : 0;
+        $averageKamar = ($totalBookings > 0) ? $totalkamar / $totalBookings : 0;
+        $averageDurasi = ($totalBookings > 0) ? $totaldurasi / $totalBookings : 0;
+        $existingBookingIds = isset($countryStats[$country]['bookingIds']) ? $countryStats[$country]['bookingIds'] : [];
+        $countryStats[$country] = array(
+            'totalCustomers' => $totalCustomers,
+            'totalBookings' => $totalBookings,
+            'averageOrang' => $averageOrang,
+            'averageKamar' => $averageKamar,
+            'averageDurasi' => $averageDurasi,
+            'bookingIds' => array_merge($existingBookingIds, $bookingIds),
+            // Add other calculated values here
+        );
+        }
+} else {
+    echo "Error executing query: " . $conn->error;
 }
+
+foreach ($countryStats as $country => $stats) {
+    $totalBookings = $stats['totalBookings'];
+
+    if ($totalBookings != 0) {
+        $money = 0;
+
+        foreach ($stats['bookingIds'] as $bookingId) {
+            // Assuming your database connection is $conn
+            $query = "SELECT total FROM transactions WHERE id = $bookingId";
+            $result = $conn->query($query);
+
+            if ($result !== false && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $money += $row['total'];
+            } else {
+                echo "Error executing query or no result for booking ID $bookingId\n";
+            }
+        }
+
+        $avgMoney = $money / $totalBookings;
+
+        // Update the array with money
+        $countryStats[$country]['money'] = $money;
+        $countryStats[$country]['avgMoney'] = $avgMoney;
+    }
+}
+
+
 
 function sortByField(&$array, $field, $sortOrder = 'ascending') {
     if ($field === 'country') {
@@ -58,18 +91,26 @@ function sortByField(&$array, $field, $sortOrder = 'ascending') {
         }
     } else {
         uasort($array, function ($a, $b) use ($field, $sortOrder) {
-            $comparison = strcmp(strval($b[$field]), strval($a[$field]));
+            $valueA = $a[$field];
+            $valueB = $b[$field];
+        
+            $comparison = ($valueA < $valueB) ? -1 : 1;
+            if ($valueA === $valueB) {
+                $comparison = 0;
+            }
+        
             return ($sortOrder === 'ascending') ? $comparison : -$comparison;
         });
     }
 }
+
 
 // Usage
 if (isset($_GET['sortBy'])) {
     $sortBy = $_GET['sortBy'];
     $sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : 'ascending';
 
-    if ($sortBy == 'TotalCustomers' || $sortBy == 'TotalBookings' || $sortBy == 'AverageOrang' || $sortBy == 'AverageKamar' || $sortBy == 'AverageDurasi') {
+    if ($sortBy == 'TotalCustomers' || $sortBy == 'TotalBookings' || $sortBy == 'money'|| $sortBy == 'AverageOrang' || $sortBy == 'AverageKamar' || $sortBy == 'AverageSpending' ||$sortBy == 'avgMoney') {
         sortByField($countryStats, lcfirst($sortBy), $sortOrder);
     } elseif ($sortBy == 'Country') {
         sortByField($countryStats, 'country', $sortOrder);
@@ -119,9 +160,11 @@ if (isset($_GET['sortBy'])) {
             <option value="Country">Country</option>
             <option value="TotalCustomers">Total Customers</option>
             <option value="TotalBookings">Total Bookings</option>
+            <option value="money">Total Spending</option>
             <option value="AverageOrang">Average Orang</option>
             <option value="AverageKamar">Average Kamar</option>
             <option value="AverageDurasi">Average Durasi</option>
+            <option value="avgMoney">Average Spending</option>
         </select>
         <input type="submit" value="Apply">
     </form>
@@ -137,9 +180,11 @@ if (isset($_GET['sortBy'])) {
             <th>Country</th>
             <th>Total Customers</th>
             <th>Total Bookings</th>
+            <th>Total Spending</th>
             <th>average Orang</th>
             <th>average Kamar</th>
             <th>average Durasi</th>
+            <th>average Spending</th>
             <!-- Add other table headers as needed -->
         </tr>
         </thead>
@@ -150,9 +195,11 @@ if (isset($_GET['sortBy'])) {
             echo "<td>$country</td>";
             echo "<td>{$stats['totalCustomers']}</td>";
             echo "<td>{$stats['totalBookings']}</td>";
+            echo "<td>{$stats['money']}</td>";
             echo "<td>{$stats['averageOrang']}</td>";
             echo "<td>{$stats['averageKamar']}</td>";
             echo "<td>{$stats['averageDurasi']}</td>";
+            echo "<td>{$stats['avgMoney']}</td>";
             // Add other table cells for calculated values
             echo "</tr>";
         }
