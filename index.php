@@ -5,7 +5,7 @@ require_once 'autoload.php';
 // MongoDB connection
 $client = new MongoDB\Client();
 $customers = $client->pdds->customers;
-$bookings = $client->pdds->booking;
+$bookings = $client->pdds->bookings;
 // ... (existing code) ...
 
 // Process form submission
@@ -90,60 +90,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </thead>
         <tbody>
         <?php
-        foreach ($customers->find() as $customer) {
-            $customerId = $customer['_id'];
-            if (!empty($filter)) {
-                $customerID = ['id_customer' => $customerId];
-                $filter = array_merge($filter, $customerID);
-            }
-            else{
-                $filter = ['id_customer' => $customerId];
-            }
-            // Total Booking
+        $customerQuery = "SELECT * FROM customers";
+        $customerResult = $conn->query($customerQuery);
+        
+        // Check if the query was successful
+        if ($customerResult !== false) {
+            // Fetch each customer
+            while ($customer = $customerResult->fetch_assoc()) {
+                $customerId = (int)$customer['id'];
+        
+                if (!empty($filter)) {
+                    $customerID = ['id_customer' => $customerId];
+                    $filter = array_merge($filter, $customerID);
+                }
+                else{
+                    $filter = ['id_customer' => $customerId];
+                }
+                // Total Booking
 
-            // Total Spending (from PHPMyAdmin transactions table)
-            $totalSpending = 0; // Default value if query fails
-            $totalBooking = 0;
-            // Get all bookings for the current customer
-            $customerBookings = $bookings->find($filter);
-            $results = iterator_to_array($customerBookings);
-            foreach ($results as &$document) {
-                $totalBooking = $totalBooking +1;
-            }
-            $customerBookings = $bookings->find($filter);
-            // Loop through each booking
-            foreach ($customerBookings as $booking) {
-                $bookingId = (string)$booking['_id']; 
-                if ($conn->connect_errno) {
-                    echo "Failed to connect to MySQL: " . $conn->connect_error;
-                } else {
-                    $totalSpendingQuery = "SELECT SUM(total) AS total_spending FROM transactions WHERE id_bookings = '$bookingId'";
-                    $totalSpendingResult = $conn->query($totalSpendingQuery);
-
-                    // Check if the query was successful
-                    if ($totalSpendingResult !== false) {
-                        $totalSpendingRow = $totalSpendingResult->fetch_assoc();
-                        $totalSpending += $totalSpendingRow['total_spending'];
+                // Total Spending (from PHPMyAdmin transactions table)
+                $totalSpending = 0; // Default value if query fails
+                $totalBooking = 0;
+                // Get all bookings for the current customer
+                $customerBookings = $bookings->find($filter);
+                $results = iterator_to_array($customerBookings);
+                foreach ($results as &$document) {
+                    $totalBooking = $totalBooking +1;
+                }
+                $customerBookings = $bookings->find($filter);
+                // Loop through each booking
+                foreach ($customerBookings as $booking) {
+                    $bookingId = (string)$booking['_id']; 
+                    if ($conn->connect_errno) {
+                        echo "Failed to connect to MySQL: " . $conn->connect_error;
                     } else {
-                        echo "Error executing query: " . $conn->error;
+                        $totalSpendingQuery = "SELECT SUM(total) AS total_spending FROM transactions WHERE id_bookings = '$bookingId'";
+                        $totalSpendingResult = $conn->query($totalSpendingQuery);
+
+                        // Check if the query was successful
+                        if ($totalSpendingResult !== false) {
+                            $totalSpendingRow = $totalSpendingResult->fetch_assoc();
+                            $totalSpending += $totalSpendingRow['total_spending'];
+                        } else {
+                            echo "Error executing query: " . $conn->error;
+                        }
                     }
                 }
-            }
-            
-            
-            if (!isset($minspending) || $minspending <= $totalSpending) {
-                echo "<tr>";
-                echo "<td>{$customer['nama']}</td>";
-                echo "<td>{$customer['negara']}</td>";
-                echo "<td>{$customer['email']}</td>";
-                echo "<td>{$customer['nomor_telepon']}</td>";
-                echo "<td>{$customer['alamat']}</td>";
-                echo "<td>{$totalBooking}</td>";
-                echo "<td>{$totalSpending}</td>";
-                echo "</tr>";
-            }
-            
-               
+                if (!isset($minspending) || $minspending <= $totalSpending) {
+                    echo "<tr>";
+                    echo "<td>{$customer['nama']}</td>";
+                    echo "<td>{$customer['negara']}</td>";
+                    echo "<td>{$customer['email']}</td>";
+                    echo "<td>{$customer['no_telepon']}</td>";
+                    echo "<td>{$customer['alamat']}</td>";
+                    echo "<td>{$totalBooking}</td>";
+                    echo "<td>{$totalSpending}</td>";
+                    echo "</tr>";
+                }
+            }       
         }
         ?>
     </tbody>
