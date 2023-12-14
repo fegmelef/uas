@@ -9,14 +9,15 @@ $collection = $client->pdds->room_types;
 $countryQuery = "SELECT DISTINCT negara FROM hotels";
 $countryResult = $conn->query($countryQuery);
 
-$roomTypes = $collection->distinct('nama');
+$tipekamar = $collection->distinct('nama');
 
-if (!$countryResult || !$roomTypes) {
+if (!$countryResult || !$tipekamar) {
     echo "Error fetching data.";
     exit();
 }
 
-if (isset($_POST['country']) && isset($_POST['ratings']) && isset($_POST['roomTypes'])) {
+if (isset($_POST['submit'])) {
+    print_r('tol');
     $country = $_POST['country'];
     $ratings = $_POST['ratings'];
     $roomTypes = $_POST['roomTypes'];
@@ -45,28 +46,29 @@ if (isset($_POST['country']) && isset($_POST['ratings']) && isset($_POST['roomTy
         $idBookingKamarArray = [];
 
         foreach ($allBookings as $booking) {
-            
             $id_booking = $booking['_id'];
             $id_kamar = $booking['id_kamar'];
-
+            $id_hotel = $booking['id_hotel'];
+        
             // Fetch the kamar name from room_types collection
             $kamarFilter = ['_id' => $id_kamar];
             $kamarData = $collection->findOne($kamarFilter);
-
-            // Add data to the result array
-            if ($kamarData) {
+        
+            // Add data to the result array only if kamar_name matches the selected room type
+            if ($kamarData && $kamarData['nama'] == $roomTypes) {
                 $idBookingKamarArray[] = [
                     'id_booking' => $id_booking,
-                    'kamar_name' => $kamarData['nama']
+                    'kamar_name' => $kamarData['nama'],
+                    'id_hotel' => $id_hotel
                 ];
             }
         }
-
-        // Now $idBookingKamarArray contains the desired data
-        print_r($idBookingKamarArray);
+        
+        // Now $idBookingKamarArray contains the desired filtered data
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -105,20 +107,58 @@ if (isset($_POST['country']) && isset($_POST['ratings']) && isset($_POST['roomTy
                 <input type="number" step="0.1" name="ratings" id="ratings" min="0" max="5" required>
 
                 <label for="roomType">Pilih Tipe Kamar:</label>
-                <select name="roomType" id="roomType">
+                <select name="roomTypes" id="roomTypes">
                     <?php
-                    foreach ($roomTypes as $type) {
+                    foreach ($tipekamar as $type) {
                         echo "<option value='" . $type . "'>" . $type . "</option>";
                     }
                     ?>
                 </select>
 
-                <input type="submit" value="Submit">
+                <input type="submit" name="submit" value="Submit">
+
             </form>
         </div>
-
+                
         <table>
-            <!-- ... (tabel untuk menampilkan hasil) ... -->
+        <thead>
+        <tr>
+            <th>nama</th>
+            <th>negara</th>
+            <th>kota</th>
+            <th>alamat</th>
+            <th>score</th>
+            <!-- Add other table headers as needed -->
+        </tr>
+        </thead>
+        <?php 
+                    foreach ($idBookingKamarArray as $booking) {
+                        $id_booking = $booking['id_booking'];
+                        $kamar_name = $booking['kamar_name'];
+                        // Assuming you have the id_hotel stored in $row['id_hotel'] from the previous query
+                        $id_hotel = $booking['id_hotel'];
+                    
+                        // Fetch hotel details using id_hotel
+                        $query = "SELECT * FROM hotels WHERE id = '$id_hotel'";
+                        $result = $conn->query($query);
+                    
+                        while ($row = $result->fetch_assoc()) {
+                            $nama = $row['nama'];
+                            $negara = $row['negara'];
+                            $kota = $row['kota'];
+                            $alamat = $row['alamat'];
+                            $score = $row['score'];
+                    
+                            echo "<tr>";
+                            echo "<td>$nama</td>";
+                            echo "<td>$negara</td>";
+                            echo "<td>$kota</td>";
+                            echo "<td>$alamat</td>";
+                            echo "<td>$score</td>";
+                            echo "</tr>";
+                        }
+                    }
+                ?>
         </table>
     </div>
 
