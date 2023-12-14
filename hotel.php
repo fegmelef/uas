@@ -33,8 +33,6 @@ if (isset($_POST['buttonsStatus'])) {
     echo '<script type="text/javascript">window.location.href = window.location.href;</script>';
 }
 
-
-
 if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
     $hotel = $_POST['hotel'];
     if (!empty($hotel)) {
@@ -59,13 +57,12 @@ if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
         // Close the statement
         $stmt->close();
     }
+    
     // Fetch bookings from MongoDB
     $allBookingsFilter = ($hotel !== "all") ? ['id_hotel' => ['$in' => $hotelIds]] : [];
     $allBookings = $bookings->find($allBookingsFilter);
 
-
     foreach ($allBookings as $booking) {
-
         // Determine the time key based on the button pressed
         $timestamp = $booking['tanggal_checkout']->toDateTime()->getTimestamp(); // Convert UTCDateTime to timestamp in seconds
         $date = new DateTime();
@@ -106,8 +103,6 @@ if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
             $error = $conn->error;
         }
     }
-
-    
 }
 
 ksort($bookingsByTime);
@@ -142,79 +137,63 @@ ksort($bookingsByTime);
     <div id="mainText">Data Hotel</div>
     <br>
     <div class="centeredFormContainers">
-    <form class = "formbutton" method = "POST">
-        <button class="button button1" id="button1" name="buttonsStatus" value="graph">Graph Chart</button>
-        <button class="button button2" id="button2" name="buttonsStatus" value="table">Table</button>
-    </form>
-    <br>
-    <form action="" method="POST" class="hotelform">
-        <label for="hotel">Select Hotels:</label>
-        <select id="hotel" name="hotel">
-            <option value="all">All Hotels</option>
-            <?php
-            // Fetch unique countries from MongoDB
-            $query = "SELECT DISTINCT nama FROM hotels";
-            $result = $conn->query($query);
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $hotel = $row['nama'];
-                    echo "<option value=\"$hotel\">$hotel</option>";
+        <form class="formbutton" method="POST">
+            <button class="button button1" id="button1" name="buttonsStatus" value="graph">Graph Chart</button>
+            <button class="button button2" id="button2" name="buttonsStatus" value="table">Table</button>
+        </form>
+        <br>
+        <form action="" method="POST" class="hotelform">
+            <label for="hotel">Select Hotels:</label>
+            <select id="hotel" name="hotel">
+                <option value="all">All Hotels</option>
+                <?php
+                // Fetch unique countries from MongoDB
+                $query = "SELECT DISTINCT nama FROM hotels";
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $hotel = $row['nama'];
+                        echo "<option value=\"$hotel\">$hotel</option>";
+                    }
                 }
-            }
-            ?>
-        </select>
-        <button class="btn btn-primary btn-filter" id="buttons1" name="buttonStatus" value="year">By Year</button>
-        <button class="btn btn-primary btn-filter" id="buttons2" name="buttonStatus" value="month">By month</button>
-        <button class="btn btn-primary btn-filter" id="buttons3" name="buttonStatus" value="day">By day</button>
-    </form>
-    <br>
-
+                ?>
+            </select>
+            <button class="btn btn-primary btn-filter" id="buttons1" name="buttonStatus" value="year">By Year</button>
+            <button class="btn btn-primary btn-filter" id="buttons2" name="buttonStatus" value="month">By month</button>
+            <button class="btn btn-primary btn-filter" id="buttons3" name="buttonStatus" value="day">By day</button>
+        </form>
+        <br>
     </div>
     <br>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <?php 
-        if($defaultCookieValue === 'graph'){
-    ?>
-    
-    <!-- Create a canvas for Total Bookings -->
-    <canvas id="totalBookingsChart" width="400" height="200"></canvas>
+    <?php
+    if ($defaultCookieValue === 'graph') {
+        ?>
+        <!-- Create a canvas for Total Bookings -->
+        <canvas id="totalBookingsChart" width="400" height="200"></canvas>
 
-    <!-- Create a canvas for Total Sum -->
-    <canvas id="totalSumChart" width="400" height="200"></canvas>
-    <?php 
-    }elseif($defaultCookieValue === 'table'){
+        <!-- Create a canvas for Total Sum -->
+        <canvas id="totalSumChart" width="400" height="200"></canvas>
+    <?php
+    } elseif ($defaultCookieValue === 'table') {
         // Calculate average totalrevenue, average jumlah booking, min booking, and max booking per year
-    $averageTotalRevenue = [];
-    $averageBooking = [];
-    $minBooking = [];
-    $maxBooking = [];
+        $averageTotalRevenue = [];
+        $averageBooking = [];
+        $minBooking = [];
+        $maxBooking = [];
 
-    foreach ($bookingsByTime as $time => $data) {
-        // Calculate average totalrevenue
-        $averageTotalRevenue[$time] = isset($data['total_sum']) ? $data['total_sum'] / $data['total_bookings'] : 0;
-
-        // Calculate average jumlah booking
-        $averageBooking[$time] = isset($data['total_bookings']) ? $data['total_bookings'] / count($data['booking_ids']) : 0;
-
-        // Calculate min booking
-        $minBooking[$time] = isset($data['total_bookings']) && is_array($data['total_bookings']) ? min($data['total_bookings']) : 0;
-
-        // Calculate max booking
-        $maxBooking[$time] = isset($data['total_bookings']) && is_array($data['total_bookings']) ? max($data['total_bookings']) : 0;
-
-    }
-
-    
-    ?>
-     <!-- Create a table for displaying statistics -->
-     <table class="table">
+        foreach ($bookingsByTime as $time => $data) {
+            // Calculate average totalrevenue
+            $averageTotalRevenue[$time] = isset($data['total_sum']) ? $data['total_sum'] / $data['total_bookings'] : 0;
+        }
+        ?>
+        <!-- Create a table for displaying statistics -->
+        <table class="table table-dark table-hover text-center">
             <thead>
                 <tr>
                     <th>Year</th>
                     <th>Average Total Revenue</th>
-                    <th>Average Jumlah Booking</th>
-                    <th>Min Booking</th>
-                    <th>Max Booking</th>
+                    <th>Total Booking</th>
                 </tr>
             </thead>
             <tbody>
@@ -224,20 +203,16 @@ ksort($bookingsByTime);
                     <tr>
                         <td><?= $year ?></td>
                         <td><?= number_format($avgRevenue, 2) ?></td>
-                        <td><?= number_format($averageBooking[$year], 2) ?></td>
-                        <td><?= $minBooking[$year] ?></td>
-                        <td><?= $maxBooking[$year] ?></td>
+                        <td><?= isset($bookingsByTime[$year]['total_bookings']) ? $bookingsByTime[$year]['total_bookings'] : 0 ?></td>
                     </tr>
                 <?php
                 }
                 ?>
             </tbody>
         </table>
-    <?php 
-    
-    }?>
+    <?php
+    } ?>
 </div>
-
 
 <script>
     function openNav() {
@@ -249,6 +224,7 @@ ksort($bookingsByTime);
         document.getElementById("sidebar").style.width = "0";
         document.body.style.overflow = "auto"; /* Enable body scrolling */
     }
+
     // PHP data to JavaScript
     var bookingsByTime = <?php echo json_encode($bookingsByTime); ?>;
 
