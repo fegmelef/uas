@@ -4,7 +4,6 @@ require_once 'autoload.php';
 
 // MongoDB connection
 $client = new MongoDB\Client();
-$customers = $client->pdds->customers;
 $bookings = $client->pdds->bookings;
 // ... (existing code) ...
 
