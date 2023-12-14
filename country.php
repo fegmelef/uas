@@ -36,8 +36,6 @@ if (isset($_POST['buttonsStatus'])) {
 }
 if (isset($_POST['country'])) {
     $country = $_POST['country'];
-    print_r($country);
-    print_r('buh');
 
     if (!empty($country)) {
         // Assuming your table has a column named "negara" for the country
@@ -95,7 +93,6 @@ if (isset($_POST['country'])) {
     
     // Fetch sum of "total" from MySQL for each booking ID
     foreach ($bookingsByTime as $time => $data) {
-        print_r('nbh');
         $bookingIds = implode(", ", $data['booking_ids']);
         $query = "SELECT SUM(total) AS total_sum FROM transactions WHERE id_bookings IN ($bookingIds)";
         $result = $conn->query($query);
