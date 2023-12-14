@@ -5,9 +5,7 @@ use MongoDB\Client;
 
 // Connect to MongoDB
 $client = new Client();
-$customers = $client->pdds->customers;
-$hotels = $client->pdds->hotels;
-$bookings = $client->pdds->booking;
+$bookings = $client->pdds->bookings;
 
 $error = '';
 $resultsFound = false;
@@ -15,19 +13,36 @@ $bookingsByTime = [];
 
 if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
     $hotel = $_POST['hotel'];
-
-    // Fetch customer IDs from MongoDB
-    $hotelsID = $hotels->find(['nama' => $hotel], ['projection' => ['_id' => 1]]);
-    $hotelIdsArray = array_map(function($document) {
-        return $document['_id'];
-    }, iterator_to_array($hotelsID));
-
+    if (!empty($hotel)) {
+        // Assuming your table has a column named "negara" for the country
+        $query = "SELECT id FROM hotels WHERE nama = ?";
+        
+        // Use prepared statements to prevent SQL injection
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $hotel);
+        
+        // Execute the query
+        $stmt->execute();
+        
+        // Bind the result variable
+        $stmt->bind_result($hotelId);
+        
+        // Fetch results into an array
+        while ($stmt->fetch()) {
+            $hotelIds[] = $hotelId;
+        }
+        
+        // Close the statement
+        $stmt->close();
+    }
+    print_r($hotelIds);
     // Fetch bookings from MongoDB
-    $allBookings = $bookings->find([
-        'id_hotel' => ['$in' => $hotelIdsArray],
-    ]);
+    $allBookingsFilter = ($hotel !== "all") ? ['id_hotel' => ['$in' => $hotelIds]] : [];
+    $allBookings = $bookings->find($allBookingsFilter);
+
 
     foreach ($allBookings as $booking) {
+        
         // Determine the time key based on the button pressed
         $timestamp = $booking['tanggal_checkout']->toDateTime()->getTimestamp(); // Convert UTCDateTime to timestamp in seconds
         $date = new DateTime();
@@ -72,9 +87,8 @@ if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
 
 ksort($bookingsByTime);
 
-
 // Close MySQL connection
-$conn->close();
+
 // ...
 ?>
 
@@ -83,7 +97,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer</title>
+    <title>Hotels</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -100,7 +114,7 @@ $conn->close();
 
 <!-- New content added -->
 <div id="content">
-    <div id="mainText">Data Country</div>
+    <div id="mainText">Data Hotel</div>
     <br>
     <div class="centeredFormContainers">
     <form action="" method="post" class="hotelform">
@@ -109,9 +123,13 @@ $conn->close();
             <option value="all">All Hotels</option>
             <?php
             // Fetch unique countries from MongoDB
-            $uniqueHotels = $hotels->distinct('nama');
-            foreach ($uniqueHotels as $hotel) {
-                echo "<option value=\"$hotel\">$hotel</option>";
+            $query = "SELECT DISTINCT nama FROM hotels";
+            $result = $conn->query($query);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $hotel = $row['nama'];
+                    echo "<option value=\"$hotel\">$hotel</option>";
+                }
             }
             ?>
         </select>
