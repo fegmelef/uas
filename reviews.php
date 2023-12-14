@@ -15,6 +15,7 @@ if (!$countryResult || !$roomTypes) {
     echo "Error fetching data.";
     exit();
 }
+
 if (isset($_POST['country']) && isset($_POST['ratings']) && isset($_POST['roomTypes'])) {
     $country = $_POST['country'];
     $ratings = $_POST['ratings'];
@@ -24,15 +25,12 @@ if (isset($_POST['country']) && isset($_POST['ratings']) && isset($_POST['roomTy
         $query = "SELECT id FROM hotels WHERE negara = ? and score >= ?";
 
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("sd", $country, $ratings); // Mengikat parameter untuk negara (string) dan ratings (double)
+        $stmt->bind_param("sd", $country, $ratings);
 
-        // Execute the query
         $stmt->execute();
 
-        // Bind the result variable
         $stmt->bind_result($hotelId);
 
-        // Fetch results into an array
         $hotelIds = [];
         while ($stmt->fetch()) {
             $hotelIds[] = $hotelId;
@@ -40,23 +38,34 @@ if (isset($_POST['country']) && isset($_POST['ratings']) && isset($_POST['roomTy
 
         $stmt->close();
 
-        // Lakukan sesuatu dengan $hotelIds di sini
-    }
-    // print_r($hotelIds);
-    $allBookingsFilter = ['id_hotel' => ['$in' => $hotelIds]];
-    $allBookings = $bookings->find($allBookingsFilter);
+        // Fetch all bookings for selected hotels
+        $allBookingsFilter = ['id_hotel' => ['$in' => $hotelIds]];
+        $allBookings = $bookings->find($allBookingsFilter);
 
-    foreach ($allBookings as $bookings) {
-        $kamar_ids[] = $bookings['id_kamar']; // Accumulate id_kamar values into an array
-    }
+        $idBookingKamarArray = [];
 
-    // Fetch all rooms with _id matching $kamar_ids
-    $allKamarFilter = ['_id' => ['$in' => $kamar_ids]];
-    $allKamar = $collection->find($allKamarFilter);
-    
-    
+        foreach ($allBookings as $booking) {
+            
+            $id_booking = $booking['_id'];
+            $id_kamar = $booking['id_kamar'];
+
+            // Fetch the kamar name from room_types collection
+            $kamarFilter = ['_id' => $id_kamar];
+            $kamarData = $collection->findOne($kamarFilter);
+
+            // Add data to the result array
+            if ($kamarData) {
+                $idBookingKamarArray[] = [
+                    'id_booking' => $id_booking,
+                    'kamar_name' => $kamarData['nama']
+                ];
+            }
+        }
+
+        // Now $idBookingKamarArray contains the desired data
+        print_r($idBookingKamarArray);
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
