@@ -240,7 +240,7 @@ ksort($bookingsByTime);
     // Create a bar chart for Total Bookings
     var ctxTotalBookings = document.getElementById('totalBookingsChart').getContext('2d');
     var totalBookingsChart = new Chart(ctxTotalBookings, {
-        type: 'bar',
+        type: 'line',  // Change type to 'line'
         data: {
             labels: labels,
             datasets: [{
@@ -259,11 +259,11 @@ ksort($bookingsByTime);
             }
         }
     });
-
-    // Create a bar chart for Total Sum
+    
+    // Create a line chart for Total Sum
     var ctxTotalSum = document.getElementById('totalSumChart').getContext('2d');
     var totalSumChart = new Chart(ctxTotalSum, {
-        type: 'bar',
+        type: 'line',  // Change type to 'line'
         data: {
             labels: labels,
             datasets: [{
