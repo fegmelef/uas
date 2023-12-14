@@ -1,4 +1,10 @@
 <?php
+if (!isset($_COOKIE['hotelcookie'])) {
+    $defaultCookieValue = 'graph';
+    setcookie('hotelcookie', $defaultCookieValue, time() + 3600, '/'); 
+} else {
+    $defaultCookieValue = $_COOKIE['hotelcookie'];
+}
 include('connect.php');
 require_once 'autoload.php';
 use MongoDB\Client;
@@ -10,6 +16,23 @@ $bookings = $client->pdds->bookings;
 $error = '';
 $resultsFound = false;
 $bookingsByTime = [];
+
+if (isset($_POST['buttonsStatus'])) {
+    $buttonStatus = $_POST["buttonsStatus"];
+
+    if ($buttonStatus === 'graph') {
+        $cookieValue = 'graph';
+    } elseif ($buttonStatus == 'table') {
+        $cookieValue = 'table';
+    } else {
+        $cookieValue = 'graph';
+    }
+    $results = [];
+
+    setcookie('hotelcookie', $cookieValue, time() + 3600, '/');
+    echo '<script type="text/javascript">window.location.href = window.location.href;</script>';
+}
+
 
 if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
     $hotel = $_POST['hotel'];
@@ -35,14 +58,13 @@ if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
         // Close the statement
         $stmt->close();
     }
-    print_r($hotelIds);
     // Fetch bookings from MongoDB
     $allBookingsFilter = ($hotel !== "all") ? ['id_hotel' => ['$in' => $hotelIds]] : [];
     $allBookings = $bookings->find($allBookingsFilter);
 
 
     foreach ($allBookings as $booking) {
-        
+
         // Determine the time key based on the button pressed
         $timestamp = $booking['tanggal_checkout']->toDateTime()->getTimestamp(); // Convert UTCDateTime to timestamp in seconds
         $date = new DateTime();
@@ -117,6 +139,11 @@ ksort($bookingsByTime);
     <div id="mainText">Data Hotel</div>
     <br>
     <div class="centeredFormContainers">
+    <form class = "formbutton" methos = "POST">
+        <button class="button button1" id="button1" name="buttonStatus" value="graph">Graph Chart</button>
+        <button class="button button2" id="button2" name="buttonStatus" value="table">Table</button>
+    </form>
+    <br>
     <form action="" method="post" class="hotelform">
         <label for="hotel">Select Hotels:</label>
         <select id="hotel" name="hotel">
@@ -137,18 +164,26 @@ ksort($bookingsByTime);
         <button class="btn btn-primary btn-filter" id="buttons2" name="buttonStatus" value="month">By month</button>
         <button class="btn btn-primary btn-filter" id="buttons3" name="buttonStatus" value="day">By day</button>
     </form>
-    <div class="buttonContainer">
-        <button class="button button1" id="button1" name="buttonStatus" value="graph">Graph Chart</button>
-        <button class="button button2" id="button2" name="buttonStatus" value="table">Table</button>
-    </div>
+    <br>
+
     </div>
     <br>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <?php 
+        if($defaultCookieValue === 'graph'){
+    ?>
+    
     <!-- Create a canvas for Total Bookings -->
     <canvas id="totalBookingsChart" width="400" height="200"></canvas>
 
     <!-- Create a canvas for Total Sum -->
     <canvas id="totalSumChart" width="400" height="200"></canvas>
+    <?php 
+    }elseif($defaultCookieValue === 'table'){
+    ?>
+    <?php 
+
+    }?>
 </div>
 
 
