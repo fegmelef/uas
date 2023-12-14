@@ -34,6 +34,7 @@ if (isset($_POST['buttonsStatus'])) {
 }
 
 
+
 if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
     $hotel = $_POST['hotel'];
     if (!empty($hotel)) {
@@ -105,6 +106,8 @@ if (isset($_POST['hotel']) && $_POST['hotel'] !== "") {
             $error = $conn->error;
         }
     }
+
+    
 }
 
 ksort($bookingsByTime);
@@ -139,12 +142,12 @@ ksort($bookingsByTime);
     <div id="mainText">Data Hotel</div>
     <br>
     <div class="centeredFormContainers">
-    <form class = "formbutton" methos = "POST">
-        <button class="button button1" id="button1" name="buttonStatus" value="graph">Graph Chart</button>
-        <button class="button button2" id="button2" name="buttonStatus" value="table">Table</button>
+    <form class = "formbutton" method = "POST">
+        <button class="button button1" id="button1" name="buttonsStatus" value="graph">Graph Chart</button>
+        <button class="button button2" id="button2" name="buttonsStatus" value="table">Table</button>
     </form>
     <br>
-    <form action="" method="post" class="hotelform">
+    <form action="" method="POST" class="hotelform">
         <label for="hotel">Select Hotels:</label>
         <select id="hotel" name="hotel">
             <option value="all">All Hotels</option>
@@ -180,9 +183,58 @@ ksort($bookingsByTime);
     <canvas id="totalSumChart" width="400" height="200"></canvas>
     <?php 
     }elseif($defaultCookieValue === 'table'){
-    ?>
-    <?php 
+        // Calculate average totalrevenue, average jumlah booking, min booking, and max booking per year
+    $averageTotalRevenue = [];
+    $averageBooking = [];
+    $minBooking = [];
+    $maxBooking = [];
 
+    foreach ($bookingsByTime as $time => $data) {
+        // Calculate average totalrevenue
+        $averageTotalRevenue[$time] = isset($data['total_sum']) ? $data['total_sum'] / $data['total_bookings'] : 0;
+
+        // Calculate average jumlah booking
+        $averageBooking[$time] = isset($data['total_bookings']) ? $data['total_bookings'] / count($data['booking_ids']) : 0;
+
+        // Calculate min booking
+        $minBooking[$time] = isset($data['total_bookings']) && is_array($data['total_bookings']) ? min($data['total_bookings']) : 0;
+
+        // Calculate max booking
+        $maxBooking[$time] = isset($data['total_bookings']) && is_array($data['total_bookings']) ? max($data['total_bookings']) : 0;
+
+    }
+
+    
+    ?>
+     <!-- Create a table for displaying statistics -->
+     <table class="table">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Average Total Revenue</th>
+                    <th>Average Jumlah Booking</th>
+                    <th>Min Booking</th>
+                    <th>Max Booking</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($averageTotalRevenue as $year => $avgRevenue) {
+                    ?>
+                    <tr>
+                        <td><?= $year ?></td>
+                        <td><?= number_format($avgRevenue, 2) ?></td>
+                        <td><?= number_format($averageBooking[$year], 2) ?></td>
+                        <td><?= $minBooking[$year] ?></td>
+                        <td><?= $maxBooking[$year] ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    <?php 
+    
     }?>
 </div>
 
