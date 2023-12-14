@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="closeBtn" onclick="closeNav()">&#10006;</div>
     <a href="index.php">Customers</a>
     <a href="hotel.php">Hotels</a>
-    <a href="#">Link 3</a>
+    <a href="reviews.php">Reviews</a>
 </div>
 
 <div id="menuToggle" onclick="openNav()">&#9776;</div>
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="all_country.php" class="button button2">all country</a>
         <a href="country.php" class="button button3">country</a>
     </div>
-    <div id="mainText">Masukan Filter</div>
+    <div id="mainText">Filter Hotel</div>
     <div class="centeredFormContainer">
         <!-- Form for Date Range Filter -->
         <form action="" method="post" class="filterForm">
