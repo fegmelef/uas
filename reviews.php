@@ -49,11 +49,11 @@ if (isset($_POST['submit'])) {
             $id_booking = $booking['_id'];
             $id_kamar = $booking['id_kamar'];
             $id_hotel = $booking['id_hotel'];
-        
+
             // Fetch the kamar name from room_types collection
             $kamarFilter = ['_id' => $id_kamar];
             $kamarData = $collection->findOne($kamarFilter);
-        
+
             // Add data to the result array only if kamar_name matches the selected room type
             if ($kamarData && $kamarData['nama'] == $roomTypes) {
                 $idBookingKamarArray[] = [
@@ -63,8 +63,6 @@ if (isset($_POST['submit'])) {
                 ];
             }
         }
-        
-        // Now $idBookingKamarArray contains the desired filtered data
     }
 }
 ?>
@@ -119,46 +117,66 @@ if (isset($_POST['submit'])) {
 
             </form>
         </div>
-                
+
         <table>
-        <thead>
-        <tr>
-            <th>nama</th>
-            <th>negara</th>
-            <th>kota</th>
-            <th>alamat</th>
-            <th>score</th>
-            <!-- Add other table headers as needed -->
-        </tr>
-        </thead>
-        <?php 
-                    foreach ($idBookingKamarArray as $booking) {
-                        $id_booking = $booking['id_booking'];
-                        $kamar_name = $booking['kamar_name'];
-                        // Assuming you have the id_hotel stored in $row['id_hotel'] from the previous query
-                        $id_hotel = $booking['id_hotel'];
-                    
-                        // Fetch hotel details using id_hotel
-                        $query = "SELECT * FROM hotels WHERE id = '$id_hotel'";
-                        $result = $conn->query($query);
-                    
-                        while ($row = $result->fetch_assoc()) {
-                            $nama = $row['nama'];
-                            $negara = $row['negara'];
-                            $kota = $row['kota'];
-                            $alamat = $row['alamat'];
-                            $score = $row['score'];
-                    
-                            echo "<tr>";
-                            echo "<td>$nama</td>";
-                            echo "<td>$negara</td>";
-                            echo "<td>$kota</td>";
-                            echo "<td>$alamat</td>";
-                            echo "<td>$score</td>";
-                            echo "</tr>";
-                        }
+            <thead>
+                <tr>
+                    <th>nama</th>
+                    <th>negara</th>
+                    <th>kota</th>
+                    <th>alamat</th>
+                    <th>score</th>
+                    <!-- Add other table headers as needed -->
+                </tr>
+            </thead>
+            <?php
+            if (isset($idBookingKamarArray)) {
+                // Array sementara untuk menyimpan nilai berdasarkan id_hotel
+                $tempArray = [];
+
+                // Proses untuk menjadikan array unik berdasarkan id_hotel
+                foreach ($idBookingKamarArray as $booking) {
+                    $id_hotel = $booking['id_hotel'];
+
+                    // Memeriksa apakah id_hotel sudah ada di dalam array sementara
+                    if (!isset($tempArray[$id_hotel])) {
+                        // Jika belum ada, tambahkan ke array sementara
+                        $tempArray[$id_hotel] = $booking;
                     }
-                ?>
+                }
+
+                // Mengembalikan hasil ke dalam $idBookingKamarArray
+                $idBookingKamarArray = array_values($tempArray);
+
+
+                foreach ($idBookingKamarArray as $booking) {
+                    $id_booking = $booking['id_booking'];
+                    $kamar_name = $booking['kamar_name'];
+                    // Assuming you have the id_hotel stored in $row['id_hotel'] from the previous query
+                    $id_hotel = $booking['id_hotel'];
+
+                    // Fetch hotel details using id_hotel
+                    $query = "SELECT distinct * FROM hotels WHERE id = '$id_hotel'";
+                    $result = $conn->query($query);
+
+                    while ($row = $result->fetch_assoc()) {
+                        $nama = $row['nama'];
+                        $negara = $row['negara'];
+                        $kota = $row['kota'];
+                        $alamat = $row['alamat'];
+                        $score = $row['score'];
+
+                        echo "<tr>";
+                        echo "<td>$nama</td>";
+                        echo "<td>$negara</td>";
+                        echo "<td>$kota</td>";
+                        echo "<td>$alamat</td>";
+                        echo "<td>$score</td>";
+                        echo "</tr>";
+                    }
+                }
+            }
+            ?>
         </table>
     </div>
 
