@@ -17,7 +17,7 @@ if (!$countryResult || !$tipekamar) {
 }
 
 if (isset($_POST['submit'])) {
-    print_r('tol');
+    // print_r('tol');
     $country = $_POST['country'];
     $ratings = $_POST['ratings'];
     $roomTypes = $_POST['roomTypes'];
